@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family:
+    'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1f2937;
+  background: #f5f7fb;
+  --color-primary: #1d4ed8;
+  --color-primary-deep: #1e40af;
+  --color-secondary: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-bg: #f5f7fb;
+  --color-card: #ffffff;
+  --color-border: #e5e7eb;
+  --color-text: #1f2937;
+  --color-text-secondary: #6b7280;
+  --shadow-soft: 0 10px 30px rgba(30, 60, 114, 0.06);
+  --shadow-strong: 0 18px 36px rgba(30, 60, 114, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.page-container {
+  min-height: calc(100vh - 92px);
+  padding: 28px;
+}
+
+.page-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-shell__header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 28px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+}
+
+.app-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.app-shell__brand h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.app-shell__brand p {
+  margin: 4px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.app-shell__logo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary), #2563eb, var(--color-secondary));
+  box-shadow: var(--shadow-soft);
+}
+
+.app-shell__nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.app-shell__nav-btn,
+.app-shell__logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.app-shell__nav-btn:hover,
+.app-shell__logout:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+.app-shell__nav-btn.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-deep));
+  border-color: transparent;
+}
+
+.app-shell__nav-btn em {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-grid;
+  place-items: center;
+  font-style: normal;
+  font-size: 12px;
+}
+
+.app-shell__user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.app-shell__user strong,
+.app-shell__user span {
+  display: block;
+  text-align: right;
+}
+
+.app-shell__user span {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.app-shell__main {
+  min-height: calc(100vh - 92px);
+}
+
+@media (max-width: 1024px) {
+  .app-shell__header {
+    grid-template-columns: 1fr;
+  }
+
+  .app-shell__nav {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .app-shell__user {
+    justify-content: flex-start;
+  }
+
+  .app-shell__user strong,
+  .app-shell__user span {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
