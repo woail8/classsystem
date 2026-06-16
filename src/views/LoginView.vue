@@ -3,7 +3,7 @@ import { Lock, User } from '@element-plus/icons-vue'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { getAccessEntryUrl, getServerHost } from '@/config/runtime'
+import { getServerHost } from '@/config/runtime'
 import { useAuthStore } from '@/stores/auth'
 import { useServerStore } from '@/stores/server'
 
@@ -12,7 +12,6 @@ const authStore = useAuthStore()
 const serverStore = useServerStore()
 const formRef = ref<FormInstance>()
 const loading = ref(false)
-const accessEntryUrl = computed(() => getAccessEntryUrl())
 const currentServerHost = computed(() => getServerHost())
 
 const form = reactive({
@@ -60,11 +59,6 @@ async function handleLogin(): Promise<void> {
       <div class="login-panel__header">
         <h2>登录客户端</h2>
         <p>用户机通过访问服务机局域网地址即可进入系统，无需手动填写服务器地址。</p>
-      </div>
-
-      <div class="login-panel__entry page-card">
-        <span>当前访问入口</span>
-        <strong>{{ accessEntryUrl || '未识别' }}</strong>
       </div>
 
       <el-form
@@ -159,25 +153,6 @@ async function handleLogin(): Promise<void> {
 .login-panel__header p {
   margin: 0;
   color: var(--color-text-secondary);
-}
-
-.login-panel__entry {
-  margin-bottom: 20px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: rgba(29, 78, 216, 0.04);
-}
-
-.login-panel__entry span {
-  color: var(--color-text-secondary);
-  font-size: 13px;
-}
-
-.login-panel__entry strong {
-  word-break: break-all;
-  color: var(--color-primary);
 }
 
 .login-panel__submit {
