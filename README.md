@@ -72,6 +72,7 @@
 - Java 8
 - Maven 3.8+
 - MySQL 8
+- Docker Desktop 或 Docker Engine（可选，用于容器化部署）
 
 ## 数据库配置
 
@@ -142,6 +143,64 @@ mvn spring-boot:run
 - 本机：`http://localhost:8080`
 - 局域网其他设备：`http://服务机IP:8080`
 
+## Docker 部署
+
+如果希望他人拉取仓库后更快部署，推荐使用 Docker。
+
+### 1. 准备环境变量
+
+复制一份环境变量模板：
+
+```bash
+copy .env.example .env
+```
+
+如果是 Linux / macOS：
+
+```bash
+cp .env.example .env
+```
+
+然后按需修改以下内容：
+
+- MySQL 密码
+- JWT 密钥
+- 服务端口
+
+### 2. 启动容器
+
+在项目根目录执行：
+
+```bash
+docker compose up -d --build
+```
+
+首次启动会完成以下流程：
+
+- 构建前端并同步到后端静态目录
+- 构建 Spring Boot 应用镜像
+- 启动 MySQL 8
+- 启动应用服务
+
+### 3. 访问系统
+
+启动完成后访问：
+
+- 本机：`http://localhost:8080`
+- 局域网：`http://服务机IP:8080`
+
+### 4. 停止容器
+
+```bash
+docker compose down
+```
+
+如果希望连卷一起删除：
+
+```bash
+docker compose down -v
+```
+
 ## 开发模式
 
 如果需要前后端联调开发：
@@ -187,6 +246,23 @@ server/target/campus-learning-server-0.0.1-SNAPSHOT.jar
 java -jar server/target/campus-learning-server-0.0.1-SNAPSHOT.jar
 ```
 
+## 环境变量
+
+项目支持通过环境变量覆盖默认配置，常用项如下：
+
+- `SERVER_PORT`
+- `SPRING_DATASOURCE_URL`
+- `SPRING_DATASOURCE_USERNAME`
+- `SPRING_DATASOURCE_PASSWORD`
+- `SPRING_DATASOURCE_DRIVER_CLASS_NAME`
+- `CAMPUS_JWT_SECRET`
+- `CAMPUS_JWT_EXPIRE_HOURS`
+- `CAMPUS_FILE_UPLOAD_PATH`
+
+模板文件见：
+
+- `.env.example`
+
 ## 默认测试账号
 
 系统启动时会自动初始化以下账号：
@@ -231,6 +307,14 @@ java -jar server/target/campus-learning-server-0.0.1-SNAPSHOT.jar
 - 使用的是服务机真实局域网 IP，而不是 `localhost`
 - 用户机与服务机在同一局域网
 - 服务机未拦截 `8080` 端口
+
+### 4. Docker 启动失败
+
+请确认：
+
+- Docker 已正确安装并启动
+- `8080` 和 `3306` 端口未被占用
+- `.env` 中数据库和 JWT 配置合法
 
 ## 后续建议
 

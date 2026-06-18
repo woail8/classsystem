@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.trae
+.vscode
+server/target
+server/server-data
+server-data
+*.log

@@ -1,14 +1,14 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:
     name: campus-learning-server
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/campus_learning?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/campus_learning?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,10 +25,10 @@ spring:
 
 campus:
   jwt:
-    secret: campus-learning-demo-secret-key-for-server-2026
-    expire-hours: 12
+    secret: ${CAMPUS_JWT_SECRET:campus-learning-demo-secret-key-for-server-2026}
+    expire-hours: ${CAMPUS_JWT_EXPIRE_HOURS:12}
   file:
-    upload-path: ./server-data/uploads
+    upload-path: ${CAMPUS_FILE_UPLOAD_PATH:./server-data/uploads}
 
 logging:
   level:
